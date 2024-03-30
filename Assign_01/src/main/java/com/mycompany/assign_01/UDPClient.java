@@ -2,7 +2,6 @@ package com.mycompany.assign_01;
 
 import java.io.*;
 import java.net.*;
-
 import javax.sound.sampled.Port;
 
 public class UDPClient {
@@ -14,12 +13,19 @@ public class UDPClient {
 
             InetAddress serverAddress = InetAddress.getByName(server_ip);
 
-            byte[] sendBuffer = "Ping".getBytes();
+            byte[] sendBuffer = "memberlistobject".getBytes();
 
             DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, server_port);
             socket.send(sendPacket);
 
-            System.out.println("Ping message sent to server.");
+            byte[] receiveBuffer = new byte[4096];
+            DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+            socket.receive(receivePacket);
+
+            String receiveData = new String(receivePacket.getData(), 0, receivePacket.getLength());
+
+            System.out.println("Received data: " + receiveData);
         }
 
         catch (IOException e) {
