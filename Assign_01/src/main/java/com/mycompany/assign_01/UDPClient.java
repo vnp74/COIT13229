@@ -16,7 +16,7 @@ public class UDPClient {
 
             byte[] sendBuffer = "Ping".getBytes();
 
-            DatagramPacket sendPacket = new DatagramPacket(sendBuffer, serverBuffer.length, serverAddress, server_port);
+            DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, server_port);
             socket.send(sendPacket);
 
             System.out.println("Ping message sent to server.");
