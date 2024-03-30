@@ -5,24 +5,24 @@ import java.io.Serializable;
 public class member implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String address;
-    private String Ph_No;
+    private String phoneNumber;
 
-    public member(String FirstName, String LastName, String address, String Ph_No) {
-        this.FirstName = FirstName;
-        this.LastName = LastName;
+    public member(String firstName, String lastName, String address, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
-        this.Ph_No = Ph_No;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public String getAddress() {
@@ -30,16 +30,16 @@ public class member implements Serializable {
     }
 
     public String getPhoneNumber() {
-        return Ph_No;
+        return phoneNumber;
     }
 
     @Override
     public String toString() {
         return "Member{" +
-                "firstName='" + FirstName + '\'' +
-                ", lastName='" + LastName + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
-                ", phoneNumber='" + Ph_No + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }
