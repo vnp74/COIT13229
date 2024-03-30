@@ -15,6 +15,10 @@ public class TCPServer {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newCachedThreadPool(); // Thread pool for handling multiple clients
 
+        // Start the serialization timer task
+        Timer timer = new Timer();
+        timer.schedule(new SerializeMembersTask(), 0, 2000); // Schedule serialization every 2 seconds
+
         try (ServerSocket serverSocket = new ServerSocket(Port)) {
             System.out.println("Server is listening on port " + Port);
 
@@ -69,6 +73,32 @@ public class TCPServer {
                     socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static class SerializeMembersTask extends TimerTask {
+        @Override
+        public void run() {
+            synchronized (SerializeMembersTask.class) {
+                try {
+                    List<String> memberLines = Files.readAllLines(Paths.get("memberlist.txt"));
+                    List<member> members = new ArrayList<>();
+
+                    for (String line : memberLines) {
+                        String[] details = line.split(":");
+                        if (details.length == 4) {
+                            members.add(new member(details[0], details[1], details[2], details[3]));
+                        }
+                    }
+
+                    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("memberlistObject"))) {
+                        oos.writeObject(members); // Serialize the entire list at once
+                    }
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         }
