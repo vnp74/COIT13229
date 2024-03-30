@@ -40,8 +40,11 @@ public class UDPServer {
 
     private static String deserializeMemberList() {
         StringBuilder memberDetails = new StringBuilder();
+        memberDetails.append("|First Name   |Last Name  |Address             |Phone Number   |\n");
+        memberDetails.append("|=============|===========|====================|===============|\n");
+
         try (ObjectInputStream ois = new ObjectInputStream(
-                new FileInputStream("Assign_01\\memberlistObject"))) {
+                new FileInputStream("memberlistObject"))) {
             @SuppressWarnings("unchecked")
             ArrayList<member> members = (ArrayList<member>) ois.readObject();
 

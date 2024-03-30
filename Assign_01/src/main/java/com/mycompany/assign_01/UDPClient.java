@@ -24,7 +24,8 @@ public class UDPClient {
 
             String receiveData = new String(receivePacket.getData(), 0, receivePacket.getLength());
 
-            System.out.println("Received data: " + receiveData);
+            System.out.println("Server Response: ");
+            System.out.println(receiveData.trim());
         }
 
         catch (IOException e) {
