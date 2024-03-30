@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TCPClient {
     public static void main(String[] args) {
         // Server hostname and port configuration.
-        // Ensure these values match your TCPServer configuration.
+        
         String hostname = "localhost";
         int port = 1125; // Port number (1125 - 25 is the last two digits of my student id)
 
