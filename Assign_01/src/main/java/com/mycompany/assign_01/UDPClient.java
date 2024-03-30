@@ -2,7 +2,6 @@ package com.mycompany.assign_01;
 
 import java.io.*;
 import java.net.*;
-import javax.sound.sampled.Port;
 
 public class UDPClient {
     private static final int server_port = 2225;

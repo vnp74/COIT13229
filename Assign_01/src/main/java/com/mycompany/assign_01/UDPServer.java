@@ -2,6 +2,7 @@ package com.mycompany.assign_01;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class UDPServer {
     private static final int Port = 2225; // Server's listening port (student id - 12191825)
@@ -17,10 +18,40 @@ public class UDPServer {
                 socket.receive(receivePacket);
 
                 String receivedText = new String(receivePacket.getData(), 0, receivePacket.getLength());
-                System.out.println("Received:" + receivedText);
+
+                if ("memberlistObject".equalsIgnoreCase(receivedText.trim())) {
+                    String memberDetails = deserializeMemberList();
+                    byte[] sendBuffer = memberDetails.getBytes();
+
+                    InetAddress clientAddress = receivePacket.getAddress();
+
+                    int clientPort = receivePacket.getPort();
+
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, clientAddress,
+                            clientPort);
+                    socket.send(sendPacket);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private static String deserializeMemberList() {
+        StringBuilder memberDetails = new StringBuilder();
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("\"C:\\Users\\VRAJ\\Documents\\GitHub\\COIT13229\\Assign_01\\memberlist.txt\""))) {
+            @SuppressWarnings("unchecked")
+            ArrayList<member> members = (ArrayList<member>) ois.readObject();
+
+            for (member member : members) {
+                memberDetails.append(member.toString()).append("\n");
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return "Error loading member details";
+        }
+        return memberDetails.toString();
     }
 }
