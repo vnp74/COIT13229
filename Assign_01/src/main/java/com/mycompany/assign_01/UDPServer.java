@@ -41,7 +41,7 @@ public class UDPServer {
     private static String deserializeMemberList() {
         StringBuilder memberDetails = new StringBuilder();
         try (ObjectInputStream ois = new ObjectInputStream(
-                new FileInputStream("\"C:\\Users\\VRAJ\\Documents\\GitHub\\COIT13229\\Assign_01\\memberlist.txt\""))) {
+                new FileInputStream("Assign_01\\memberlistObject"))) {
             @SuppressWarnings("unchecked")
             ArrayList<member> members = (ArrayList<member>) ois.readObject();
 
