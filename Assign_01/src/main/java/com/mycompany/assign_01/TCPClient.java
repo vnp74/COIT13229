@@ -42,14 +42,14 @@ public class TCPClient {
                 // Validate inputs before sending
                 String namePattern = "^[A-Za-z-']+$";
                 String addressPattern = "^.+$"; // Basic check for non-empty
-                String phoneNumberPattern = "\\+?[0-9]{10,13}"; // Example pattern: Optional +, followed by 10 to 13 digits
+                String phoneNumberPattern = "\\+?[0-9]{10,13}"; // expression to validate phone number
 
                 // Validate First Name
                 if (!firstName.matches(namePattern)) {
                     System.out.println("Invalid First Name. Please enter a valid First Name.");
                     continue; // Skip sending to server and prompt for details again
                 }
-                
+
                 // Validate Last Name
                 if (!lastName.matches(namePattern)) {
                     System.out.println("Invalid Last Name. Please enter a valid Last Name.");
@@ -88,8 +88,8 @@ public class TCPClient {
 
         catch (UnknownHostException e) {
             System.err.println("Server not found: " + e.getMessage());
-        } 
-        
+        }
+
         catch (IOException e) {
             System.err.println("I/O Error: " + e.getMessage());
         }
