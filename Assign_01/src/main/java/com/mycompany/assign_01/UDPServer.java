@@ -44,7 +44,7 @@ public class UDPServer {
         memberDetails.append("|=============|===========|====================|===============|\n");
         File file = new File("memberlistObject");
         try (ObjectInputStream ois = new ObjectInputStream(
-                new FileInputStream("memberlistObject"))) {
+                new FileInputStream(file))) {
             @SuppressWarnings("unchecked")
             ArrayList<member> members = (ArrayList<member>) ois.readObject();
 
