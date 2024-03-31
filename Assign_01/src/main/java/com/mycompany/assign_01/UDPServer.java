@@ -42,7 +42,7 @@ public class UDPServer {
         StringBuilder memberDetails = new StringBuilder();
         memberDetails.append("|First Name   |Last Name  |Address             |Phone Number   |\n");
         memberDetails.append("|=============|===========|====================|===============|\n");
-
+        File file = new File("memberlistObject");
         try (ObjectInputStream ois = new ObjectInputStream(
                 new FileInputStream("memberlistObject"))) {
             @SuppressWarnings("unchecked")
@@ -51,9 +51,14 @@ public class UDPServer {
             for (member member : members) {
                 memberDetails.append(member.toString()).append("\n");
             }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return "Error loading member details";
+        } catch (FileNotFoundException e) {
+            return "Error: File not found - " + e.getMessage();
+        } catch (IOException e) {
+            return "Error reading from file - " + e.getMessage();
+        } catch (ClassNotFoundException e) {
+            return "Class not found during deserialization - " + e.getMessage();
+        } catch (ClassCastException e) {
+            return "Class cast problem during deserialization - " + e.getMessage();
         }
         return memberDetails.toString();
     }
